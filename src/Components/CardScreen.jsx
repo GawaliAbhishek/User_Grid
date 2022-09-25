@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Card from "./Card";
+import Loder from './Loder'
 import '../CSS/CardScreen.css';
 import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
@@ -17,16 +18,25 @@ function CardScreen() {
  let[data4,setData4]=useState("");
  let[data5,setData5]=useState("");
  let[data6,setData6]=useState("");
+ let[isLoded,setIsLoded]=useState(false);
 
  const getUsers=()=>{
   axios.get('https://reqres.in/api/users?page=1').then(res=>{
     //console.log(res);
+    setIsLoded(true);
+    setTimeout(() => {
+      console.log("Loding....");
+      
     setData1(res.data.data[0]);
     setData2(res.data.data[1]);
     setData3(res.data.data[2]);
     setData4(res.data.data[3]);
     setData5(res.data.data[4]);
     setData6(res.data.data[5]);
+      setIsLoded(false);
+    }, 2000);
+  
+    
 
   }).catch(err=>{
     console.log(err);
@@ -54,9 +64,10 @@ function CardScreen() {
         </AppBar>
       </Box>
 
-      
+
+      {isLoded ? <Loder/> : <> </>}
         <div className="container">
-            <div className="row1">y
+            <div className="row1">
                 <Card first_name={data1.first_name} last_name={data1.last_name} img={data1.avatar} email={data1.email} />
                 <Card first_name={data2.first_name} last_name={data2.last_name} img={data2.avatar} email={data2.email} />
                 <Card first_name={data3.first_name} last_name={data3.last_name} img={data3.avatar} email={data3.email} />
