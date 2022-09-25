@@ -1,6 +1,7 @@
 
-import React, { useState } from "react";
-import Navbar from "./Components/Navbar";
+import React from "react";
+import CardScreen from "./Components/CardScreen";
+
 
 
 
@@ -10,11 +11,7 @@ function App() {
 
   return (
     <>
-    <Navbar/>
-
-     
-   
-    
+    <CardScreen/>
     </>
   );
 }
